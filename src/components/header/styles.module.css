@@ -1,0 +1,18 @@
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 72px;
+    background-color: #F6F9FA;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+    color: #212A3E;
+}

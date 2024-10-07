@@ -1,5 +1,3 @@
-import codeIcon from '../../assets/icons/frame.svg'
-import night from '../../assets/icons/night.svg'
 import styles from './styles.module.css'
 import Button from '../buttons/Button'
 import CodeIcon from '../icons/CodeIcon'

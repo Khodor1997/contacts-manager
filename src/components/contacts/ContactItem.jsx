@@ -1,36 +1,35 @@
-import StarIcon from '../icons/StarIcon'
-import styles from './style.module.css'
-import dots from '../../assets/icons/dotted.svg'
-import { useState } from 'react';
+import StarIcon from '../icons/StarIcon';
+import styles from './style.module.css';
+import dots from '../../assets/icons/dotted.svg';
 
-export default function ContactItem() {
-    const [showPanel, setShowPanel] = useState(false);
-
-    function togglePanel() {
-        setShowPanel(prev => !prev);
-    }
+export default function ContactItem({ user, activeContactId, toggleActiveContact }) {
     return (
         <div className={styles.contact}>
             <div className={styles['contact__info']}>
                 <div className={styles['contact__img']}>
-                    <img src="/profile.png" alt="profile image" />
+                    {user.img && <img src={user.img} alt="profile image" />}
+                    {!user.img && <img src="/profile.png" alt="profile image" />}
                 </div>
                 <div>
-                    <h3 className={styles['contact__name']}>Pavel Khodar</h3>
-                    <span className={styles['contact__phone']}>+375295877809</span>
+                    <h3 className={styles['contact__name']}>{user.name} {user.lastName}</h3>
+                    <span className={styles['contact__phone']}>{user.phone}</span>
                 </div>
-                </div>
-            <div className={styles['contact__actions']}>
-                <StarIcon className={styles['contact__favorites']}/>
-                <img onClick={togglePanel} className={styles['contact__control']} src={dots} alt="" />
             </div>
-            {showPanel && (
+            <div className={styles['contact__actions']}>
+                <StarIcon className={styles['contact__favorites']} />
+                <img 
+                    onClick={() => toggleActiveContact(user.id)} 
+                    className={styles['contact__control']} 
+                    src={dots} 
+                    alt="dots menu" 
+                />
+            </div>
+            {activeContactId === user.id && (
                 <div className={styles['contact__actions-panel']}>
                     <span>Delete contact</span>
                     <span>Edit contact</span>
                 </div>
             )}
         </div>
-        
-    )
+    );
 }

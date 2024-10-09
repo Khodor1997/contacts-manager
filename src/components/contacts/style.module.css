@@ -1,4 +1,5 @@
 .contacts-board {
+    width: 70%;
     border-radius: 20px;
     background: #F6F9FA;
 }
@@ -85,4 +86,67 @@
 }
 .contact__actions-panel span {
     padding: 10px 20px;
+}
+.create-contact {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-right: 24px;
+    border-radius: 20px;
+    background: #394867;
+}
+.create-contact__image {
+    position: relative;
+    width: 144px;
+    height: 144px;
+    margin: 30px auto 30px;
+    border-radius: 50%;
+}
+.create-contact__add-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #394867B2;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.create-contact__add-image:hover {
+    border-color: #E4B408;
+    transform: scale(1.05);
+}
+.contact-form {
+    border-radius: 20px;
+    padding: 16px;
+    background: #F6F9FA;
+}
+.contact-form__item {
+    display: flex;
+    padding: 8px;
+    border: 1px solid #394867;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.contact-form__item span {
+    width: 1px;
+    background: #394867;
+    margin-right: 8px;
+}
+.contact-form__item img {
+    margin-right: 8px;
+}
+.contact-form__input {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #394867B2;
 }

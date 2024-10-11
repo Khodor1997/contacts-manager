@@ -26,3 +26,46 @@
     /* Стили для последнего дочернего элемента */
     margin-left: 8px;
 }
+.button-form {
+    width: 100%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 8px;
+    background: #394867;
+    color: #fff;
+}
+.button-form__icon {
+    stroke: #ffff;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.button-form__icon:hover {
+    fill: #fff
+}
+.button-form div {
+    width: 1px;
+    background: #fff;
+    height: 100%;
+}
+.button-form__text {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    background: transparent;
+    color: #fff;
+    outline: none;
+    border: none;
+}
+.button-form__text:focus {
+    outline: none;
+}
+.button-form__text:hover {
+    border: none;
+    outline: none;
+}
+.button-form__favorite {
+    fill: #fff;
+}

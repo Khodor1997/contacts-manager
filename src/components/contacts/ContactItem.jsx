@@ -16,7 +16,9 @@ export default function ContactItem({ user, activeContactId, toggleActiveContact
                 </div>
             </div>
             <div className={styles['contact__actions']}>
-                <StarIcon className={styles['contact__favorites']} />
+                {/* <StarIcon className={styles['contact__favorites']} /> */}
+                <StarIcon className={`${styles['contact__favorites']} ${user.isFavorite ? styles['contact__favorites_active'] : ''}`} />
+
                 <img 
                     onClick={() => toggleActiveContact(user.id)} 
                     className={styles['contact__control']} 

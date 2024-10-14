@@ -5,14 +5,20 @@ import ContactsDashboard from './components/contacts/ContactsDashboard'
 import ContactCreateForm from './components/contacts/ContactCreateForm'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [contacts, setContact] = useState([
+    { id: 1, name: 'Pavel', lastName: 'Bobar', phone: '+375295800809', img: '/profile.png', isFavorite: false },
+    { id: 2, name: 'John', lastName: 'Doe', phone: '+1234567890', img: '/profile.png', isFavorite: false },
+  ])
 
+  const createContact = (newContact) => {
+    setContact([...contacts, newContact])
+  }
   return (
     <>
       <Header/>
       <div className='container contact-body'>
-        <ContactCreateForm/>
-        <ContactsDashboard/>
+        <ContactCreateForm create={createContact}/>
+        <ContactsDashboard contacts={contacts}/>
       </div>
     </>
   )

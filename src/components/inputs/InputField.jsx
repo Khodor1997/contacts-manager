@@ -9,7 +9,7 @@ export default function InputField({ icon, altText, value, onChange, type = "tex
                 className={styles['contact-form__input']}
                 type={type}
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
+                onChange={onChange}
                 placeholder={placeholder}
             />
         </div>

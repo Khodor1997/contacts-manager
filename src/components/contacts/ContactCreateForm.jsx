@@ -9,36 +9,20 @@ import phones from './../../assets/icons/phone.svg';
 import mail from './../../assets/icons/mail.svg';
 import edit from './../../assets/icons/edit.svg';
 
-export default function ContactCreateForm() {
-    // Состояние для каждого инпута
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('');
-    const [message, setMessage] = useState('');
-
-    const [isFavorite, setIsFavorite] = useState(false);
+export default function ContactCreateForm({create}) {
+    const [contact, setContact] = useState({name: '', email: '', phone: '', address: '', message: '', isFavorite: false})
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formData = { name, email, phone, address, message, isFavorite };
+        const newContact = { ...contact, id: Date.now() };
 
-        console.log(formData);
-        clearForm()
+        create(newContact)
+        setContact({name: '', email: '', phone: '', address: '', message: ''})
     };
 
     const handleFavoriteClick = () => {
-        setIsFavorite(!isFavorite);
-        console.log('111111')
+        setContact({...contact, isFavorite: !contact.isFavorite})
     };
-
-    const clearForm = (() => {
-        setName('');
-        setEmail('');
-        setPhone('');
-        setAddress('');
-        setMessage('');
-    })
     return (
         <div className={styles['create-contact']}>
             <div className={styles['create-contact__image']}>
@@ -49,16 +33,15 @@ export default function ContactCreateForm() {
             </div>
             <div className={styles['contact-form']}>
                 <form onSubmit={handleSubmit}>
-                    <InputField icon={user} altText="User icon" value={name} onChange={setName} placeholder="Enter your name" />
-                    <InputField icon={users} altText="Email icon" value={email} onChange={setEmail} placeholder="Enter your email" />
-                    <InputField icon={phones} altText="Phone icon" value={phone} onChange={setPhone} placeholder="Enter your phone" />
-                    <InputField icon={mail} altText="Address icon" value={address} onChange={setAddress} placeholder="Enter your address" />
-                    <InputField icon={edit} altText="Message icon" value={message} onChange={setMessage} placeholder="Enter your message" />
+                    <InputField icon={user} altText="User icon" value={contact.name} onChange={e => setContact({...contact, name: e.target.value})} placeholder="Enter your name" />
+                    <InputField icon={users} altText="Email icon" value={contact.email} onChange={e => setContact({...contact, email: e.target.value})} placeholder="Enter your email" />
+                    <InputField icon={phones} altText="Phone icon" value={contact.phone} onChange={e => setContact({...contact, phone: e.target.value})} placeholder="Enter your phone" />
+                    <InputField icon={mail} altText="Address icon" value={contact.address} onChange={e => setContact({...contact, address: e.target.value})} placeholder="Enter your address" />
+                    <InputField icon={edit} altText="Message icon" value={contact.message} onChange={e => setContact({...contact, message: e.target.value})} placeholder="Enter your message" />
                     
-                    {/* <button type="submit">Submit</button> */}
                     <ButtonForm
                         type="submit"
-                        isFavorite={isFavorite} 
+                        isFavorite={contact.isFavorite} 
                         onFavoriteClick={handleFavoriteClick}
                     >
                         Submit

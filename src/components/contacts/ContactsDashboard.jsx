@@ -2,13 +2,8 @@ import { useState } from 'react';
 import ContactItem from './ContactItem';
 import styles from './style.module.css';
 
-export default function ContactsDashboard() {
+export default function ContactsDashboard({contacts}) {
     const [activeContactId, setActiveContactId] = useState(null);
-
-    const contacts = [
-        { id: 1, name: 'Pavel', lastName: 'Bobar', phone: '+375295800809', img: '/profile.png' },
-        { id: 2, name: 'John', lastName: 'Doe', phone: '+1234567890', img: '/profile.png' }
-    ];
 
     function toggleActiveContact(contactId) {
         if (activeContactId === contactId) {

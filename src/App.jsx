@@ -13,12 +13,17 @@ function App() {
   const createContact = (newContact) => {
     setContact([...contacts, newContact])
   }
+
+  const removeContact = (contact) => {
+    setContact(contacts.filter(e => e.id != contact.id))
+  }
+  
   return (
     <>
       <Header/>
       <div className='container contact-body'>
         <ContactCreateForm create={createContact}/>
-        <ContactsDashboard contacts={contacts}/>
+        <ContactsDashboard remove={removeContact} contacts={contacts}/>
       </div>
     </>
   )

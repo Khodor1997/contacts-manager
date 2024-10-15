@@ -2,7 +2,7 @@ import StarIcon from '../icons/StarIcon';
 import styles from './style.module.css';
 import dots from '../../assets/icons/dotted.svg';
 
-export default function ContactItem({ user, activeContactId, toggleActiveContact }) {
+export default function ContactItem({ user, activeContactId, toggleActiveContact, remove }) {
     return (
         <div className={styles.contact}>
             <div className={styles['contact__info']}>
@@ -27,8 +27,8 @@ export default function ContactItem({ user, activeContactId, toggleActiveContact
                 />
             </div>
             {activeContactId === user.id && (
-                <div className={styles['contact__actions-panel']}>
-                    <span>Delete contact</span>
+                <div className={styles['actions-panel']}>
+                    <span onClick={() => remove(user)}>Delete contact</span>
                     <span>Edit contact</span>
                 </div>
             )}

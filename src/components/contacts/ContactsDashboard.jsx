@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ContactItem from './ContactItem';
 import styles from './style.module.css';
 
-export default function ContactsDashboard({contacts}) {
+export default function ContactsDashboard({contacts, remove}) {
     const [activeContactId, setActiveContactId] = useState(null);
 
     function toggleActiveContact(contactId) {
@@ -25,6 +25,7 @@ export default function ContactsDashboard({contacts}) {
                 <ContactItem 
                     key={contact.id} 
                     user={contact} 
+                    remove={remove}
                     activeContactId={activeContactId} 
                     toggleActiveContact={toggleActiveContact} 
                 />

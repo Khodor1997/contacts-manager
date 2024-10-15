@@ -1,7 +1,7 @@
 import StarIcon from '../icons/StarIcon';
 import styles from './styles.module.css'
 
-export default function ButtonForm ({ children, type = "button", onClick, onFavoriteClick, isFavorite}) {
+export default function ButtonForm ({ children, type = "button", onClick, onFavoriteClick, isFavorite, disabled}) {
     return (
         <div 
             className={styles['button-form']}
@@ -15,7 +15,8 @@ export default function ButtonForm ({ children, type = "button", onClick, onFavo
             <button
                 className={styles['button-form__text']}
                 type={type} 
-                onClick={onClick} 
+                onClick={onClick}
+                disabled={disabled} 
             >
                 {children}
             </button>

@@ -36,6 +36,10 @@
     border-radius: 8px;
     background: #394867;
     color: #fff;
+    transition: 0.3s;
+}
+.button-form:hover{
+    transform: scale(1.03);
 }
 .button-form__icon {
     stroke: #ffff;
@@ -58,6 +62,10 @@
     color: #fff;
     outline: none;
     border: none;
+}
+.button-form__text:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
 }
 .button-form__text:focus {
     outline: none;

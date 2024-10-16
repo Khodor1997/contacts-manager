@@ -30,6 +30,9 @@ export default function ContactsDashboard({contacts, remove}) {
                     toggleActiveContact={toggleActiveContact} 
                 />
             ))}
+            {!contacts.length && (
+                <div className={styles['contacts-empty']}>Сontact list is empty</div>
+            )}
         </div>
     );
 }

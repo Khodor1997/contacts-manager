@@ -1,32 +1,29 @@
-import { createUserWithEmailAndPassword } from "firebase/auth"
-import ContactFormImage from '../contacts/ContactFormImage';
-import InputField from "../inputs/InputField"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
 import { auth } from "../../firebase"
+import InputField from "../inputs/InputField"
+import ContactFormImage from '../contacts/ContactFormImage';
 import styles from './style.module.css';
 import user from './../../assets/icons/user.svg';
 import edit from './../../assets/icons/edit.svg';
 
-export default function SignUp () {
+export default function SignIn () {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [copyPassword, setCopyPassword] = useState('')
     const [error, setError] = useState('')
 
-    function register(e) {
+    function logIn(e) {
         e.preventDefault()
-        if (copyPassword !== password) {
-            setError('Password incorrect')
-            return
-        }
-        createUserWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 console.log(user)
                 setEmail('')
                 setPassword('')
-                setCopyPassword('')
                 setError('')
-            }).catch((error) => console.log(error))
+            }).catch((error) => {
+                console.log(error)
+                setError('sorry')
+            })
     }
 
     return (
@@ -34,7 +31,7 @@ export default function SignUp () {
             <div className={styles['auth']}>
                 <ContactFormImage styles={styles}/>
                 <div className={styles['auth-form']}>
-                    <form onSubmit={register}>
+                    <form>
                         <InputField
                             icon={user}
                             value={email}
@@ -47,13 +44,7 @@ export default function SignUp () {
                             onChange={e => setPassword(e.target.value)}
                             placeholder="Enter your password"
                         />
-                        <InputField
-                            icon={edit}
-                            value={copyPassword}
-                            onChange={e => setCopyPassword(e.target.value)}
-                            placeholder="Enter your password"
-                        />
-                        <button>signUp</button>
+                        <button onClick={logIn}>signUp</button>
                     </form>
                 </div>
             </div>

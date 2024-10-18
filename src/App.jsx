@@ -3,8 +3,10 @@ import './App.css'
 import Header from './components/header/Header'
 import ContactsDashboard from './components/contacts/ContactsDashboard'
 import ContactCreateForm from './components/contacts/ContactCreateForm'
-import axios from 'axios'
 import SignUp from './components/auth/SignUp'
+import SignIn from './components/auth/SignIn'
+// import AuthDetails from './components/auth/AuthDetails'
+import { useAuth } from './hooks/useAuth'
 
 function App() {
   const [contacts, setContact] = useState([
@@ -12,14 +14,7 @@ function App() {
     { id: 2, name: 'John', lastName: 'Doe', phone: '+1234567890', img: '/profile.png', isFavorite: false },
   ])
 
-  useEffect(() => {
-    fetchContacts()
-  }, []);
-
-  async function fetchContacts() {
-    let contacts = await axios.get('https://jsonplaceholder.typicode.com/users')
-    setContact(contacts.data)
-  }
+  const authUser = useAuth()
 
   const createContact = (newContact) => {
     setContact([...contacts, newContact])
@@ -28,15 +23,19 @@ function App() {
   const removeContact = (contact) => {
     setContact(contacts.filter(e => e.id != contact.id))
   }
-  
   return (
     <>
-      <SignUp/>
-      <Header/>
-      <div className='container contact-body'>
-        <ContactCreateForm create={createContact}/>
-        <ContactsDashboard remove={removeContact} contacts={contacts}/>
-      </div>
+      {!authUser ? (
+        <SignIn/>
+      ): (
+        <>
+          <Header/>
+          <div className='container contact-body'>
+            <ContactCreateForm create={createContact}/>
+            <ContactsDashboard authUser={authUser} remove={removeContact} contacts={contacts}/>
+          </div>
+        </>
+      )}
     </>
   )
 }

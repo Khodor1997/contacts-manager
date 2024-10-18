@@ -1,0 +1,35 @@
+.auth {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border-radius: 20px;
+    background: #394867;
+}
+.auth-form {
+    border-radius: 20px;
+    padding: 16px;
+    background: #F6F9FA;
+}
+.create-contact__image {
+    position: relative;
+    width: 144px;
+    height: 144px;
+    margin: 30px auto 30px;
+    border-radius: 50%;
+}
+.auth-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: #fff;
+    background-image: url(../../assets/image/auth-bg.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+
+}

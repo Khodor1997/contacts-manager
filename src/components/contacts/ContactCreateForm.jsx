@@ -1,8 +1,8 @@
 import InputField from '../inputs/InputField';
 import ButtonForm from '../buttons/ButtonForm';
+import ContactFormImage from './ContactFormImage';
 import { useState } from 'react';
 import styles from './style.module.css';
-import createImage from './../../assets/icons/add-image.svg';
 import user from './../../assets/icons/user.svg';
 import users from './../../assets/icons/users.svg';
 import phones from './../../assets/icons/phone.svg';
@@ -39,12 +39,7 @@ export default function ContactCreateForm({create}) {
     }
     return (
         <div className={styles['create-contact']}>
-            <div className={styles['create-contact__image']}>
-                <img src="/profile.png" alt="profile image" />
-                <div className={styles['create-contact__add-image']}>
-                    <img src={createImage} alt="create image" />
-                </div>
-            </div>
+            <ContactFormImage styles={styles}/>
             <div className={styles['contact-form']}>
                 <form onSubmit={handleSubmit}>
                     <InputField

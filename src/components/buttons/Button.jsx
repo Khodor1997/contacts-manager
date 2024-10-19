@@ -1,8 +1,8 @@
 import styles from './styles.module.css'
 
-export default function Button({ className, icon, children }) {
+export default function Button({ className, icon, children, onClick}) {
     return (
-        <button className={`${styles.button} ${className || ''}`}>
+        <button onClick={onClick} className={`${styles.button} ${className || ''}`}>
             {className === 'reverse' ? (
                 <>
                     <div>{icon}</div>
@@ -11,7 +11,7 @@ export default function Button({ className, icon, children }) {
             ) : (
                 <>
                     <span>{children}</span>
-                    <div>{icon}</div>
+                    <div className={styles['button-icon']}>{icon}</div>
                 </>
             )}
         </button>

@@ -12,6 +12,10 @@
     cursor: pointer;
     transition: 0.3s;
 }
+.button-icon {
+    display: flex;
+    align-items: center;
+}
 .button svg {
     stroke: #394867
 }

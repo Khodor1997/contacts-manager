@@ -6,12 +6,16 @@ export default function ButtonForm ({ children, type = "button", onClick, onFavo
         <div 
             className={styles['button-form']}
         >
-            <span style={{display: "flex"}} onClick={onFavoriteClick}>
-                <StarIcon 
-                    className={`${styles['button-form__icon']} ${isFavorite ? styles['button-form__favorite'] : ''}`}
-                />
-            </span>
-            <div></div>
+            {isFavorite ? (
+                <>
+                    <span style={{display: "flex"}} onClick={onFavoriteClick}>
+                        <StarIcon 
+                            className={`${styles['button-form__icon']} ${isFavorite ? styles['button-form__favorite'] : ''}`}
+                        />
+                    </span>
+                    <div></div>
+                </>
+            ): null}
             <button
                 className={styles['button-form__text']}
                 type={type} 

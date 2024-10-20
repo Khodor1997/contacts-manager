@@ -14,6 +14,8 @@ function App() {
     { id: 2, name: 'John', lastName: 'Doe', phone: '+1234567890', img: '/profile.png', isFavorite: false },
   ])
 
+  const [showRegistrationForm, setShowRegistrationForm ] = useState(false)
+
   const authUser = useAuth()
 
   const createContact = (newContact) => {
@@ -23,16 +25,23 @@ function App() {
   const removeContact = (contact) => {
     setContact(contacts.filter(e => e.id != contact.id))
   }
+  const redirectToSignUp = () => {
+    setShowRegistrationForm(true)
+  }
   return (
     <>
       {!authUser ? (
-        <SignIn/>
-      ): (
+        showRegistrationForm ? (
+          <SignUp />
+        ) : (
+          <SignIn toSignUpForm={redirectToSignUp} />
+        )
+      ) : (
         <>
-          <Header/>
-          <div className='container contact-body'>
-            <ContactCreateForm create={createContact}/>
-            <ContactsDashboard authUser={authUser} remove={removeContact} contacts={contacts}/>
+          <Header />
+          <div className="container contact-body">
+            <ContactCreateForm create={createContact} />
+            <ContactsDashboard authUser={authUser} remove={removeContact} contacts={contacts} />
           </div>
         </>
       )}

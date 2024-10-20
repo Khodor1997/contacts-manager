@@ -3,11 +3,12 @@ import { useState } from "react"
 import { auth } from "../../firebase"
 import InputField from "../inputs/InputField"
 import ContactFormImage from '../contacts/ContactFormImage';
+import ButtonForm from '../buttons/ButtonForm';
 import styles from './style.module.css';
 import user from './../../assets/icons/user.svg';
 import edit from './../../assets/icons/edit.svg';
 
-export default function SignIn () {
+export default function SignIn ({toSignUpForm}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -42,9 +43,20 @@ export default function SignIn () {
                             icon={edit}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            type="password"
                             placeholder="Enter your password"
                         />
-                        <button onClick={logIn}>signUp</button>
+                        <div 
+                            onClick={toSignUpForm}
+                            className={styles['signup-text']}
+                        >
+                            Registration
+                        </div>
+                        <ButtonForm
+                            onClick={logIn}
+                        >
+                            Sign In
+                        </ButtonForm>
                     </form>
                 </div>
             </div>

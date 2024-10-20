@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import ContactFormImage from '../contacts/ContactFormImage';
 import InputField from "../inputs/InputField"
+import ButtonForm from "../buttons/ButtonForm";
 import { useState } from "react"
 import { auth } from "../../firebase"
 import styles from './style.module.css';
@@ -53,7 +54,7 @@ export default function SignUp () {
                             onChange={e => setCopyPassword(e.target.value)}
                             placeholder="Enter your password"
                         />
-                        <button>signUp</button>
+                        <ButtonForm onClick={createUserWithEmailAndPassword}> Sign Up </ButtonForm>
                     </form>
                 </div>
             </div>

@@ -5,7 +5,6 @@ import UserIcon from "../icons/UserIcon";
 
 export default function ContactsAuthDetails({styles, authUser}) {
     function userSignOut() {
-        console.log('2222222')
         signOut(auth)
     }
 

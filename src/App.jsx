@@ -28,13 +28,16 @@ function App() {
   const redirectToSignUp = () => {
     setShowRegistrationForm(true)
   }
+  const redirectToSignIn = () => {
+    setShowRegistrationForm(false)
+  }
   return (
     <>
       {!authUser ? (
         showRegistrationForm ? (
-          <SignUp />
+          <SignUp redirectToSignIn={redirectToSignIn}/>
         ) : (
-          <SignIn toSignUpForm={redirectToSignUp} />
+          <SignIn redirectToSignUp={redirectToSignUp} />
         )
       ) : (
         <>

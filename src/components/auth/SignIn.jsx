@@ -8,7 +8,7 @@ import styles from './style.module.css';
 import user from './../../assets/icons/user.svg';
 import edit from './../../assets/icons/edit.svg';
 
-export default function SignIn ({toSignUpForm}) {
+export default function SignIn ({redirectToSignUp}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
@@ -47,7 +47,7 @@ export default function SignIn ({toSignUpForm}) {
                             placeholder="Enter your password"
                         />
                         <div 
-                            onClick={toSignUpForm}
+                            onClick={redirectToSignUp}
                             className={styles['signup-text']}
                         >
                             Registration

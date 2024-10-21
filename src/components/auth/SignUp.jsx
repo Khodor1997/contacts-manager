@@ -8,7 +8,7 @@ import styles from './style.module.css';
 import user from './../../assets/icons/user.svg';
 import edit from './../../assets/icons/edit.svg';
 
-export default function SignUp () {
+export default function SignUp ({redirectToSignIn}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [copyPassword, setCopyPassword] = useState('')
@@ -22,7 +22,6 @@ export default function SignUp () {
         }
         createUserWithEmailAndPassword(auth, email, password)
             .then((user) => {
-                console.log(user)
                 setEmail('')
                 setPassword('')
                 setCopyPassword('')
@@ -46,15 +45,23 @@ export default function SignUp () {
                             icon={edit}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            type="password"
                             placeholder="Enter your password"
                         />
                         <InputField
                             icon={edit}
                             value={copyPassword}
                             onChange={e => setCopyPassword(e.target.value)}
+                            type="password"
                             placeholder="Enter your password"
                         />
-                        <ButtonForm onClick={createUserWithEmailAndPassword}> Sign Up </ButtonForm>
+                        <div 
+                            onClick={redirectToSignIn}
+                            className={styles['signup-text']}
+                        >
+                            You already have a profile?
+                        </div>
+                        <ButtonForm onClick={register}> Sign Up </ButtonForm>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,17 @@
 import styles from './style.module.css'
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
-export default function InputField({ icon, altText, value, onChange, type = "text", placeholder = "", validate }) {
+interface IProps {
+    icon: string;
+    value: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    type?: string;
+    placeholder?: string;
+    altText?: string;
+    validate?: string;
+}
+
+export default function InputField({icon, altText = "", value, onChange, type = "text", placeholder = "", validate }: IProps) {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = () => {
@@ -14,7 +24,10 @@ export default function InputField({ icon, altText, value, onChange, type = "tex
 
     return (
         <>
-            <div className={`${styles['contact-form__item']} ${isFocused ? styles['contact-form__item--active'] : ''} ${validate ? styles['contact-form__item--error'] : ''}`}>
+            <div
+                className={`${styles['contact-form__item']} 
+                    ${isFocused ? styles['contact-form__item--active'] : ''} 
+                    ${validate ? styles['contact-form__item--error'] : ''}`}>
                 <img src={icon} alt={altText} />
                 <span></span>
                 <input

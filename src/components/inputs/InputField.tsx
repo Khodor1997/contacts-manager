@@ -1,7 +1,17 @@
 import styles from './style.module.css'
-import { useState } from 'react';
+import { useState, ChangeEvent, FC } from 'react';
 
-export default function InputField({ icon, altText, value, onChange, type = "text", placeholder = "", validate }) {
+interface IProps {
+    icon: string;
+    value: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    type?: string;
+    placeholder?: string;
+    altText?: string;
+    validate?: boolean;
+}
+
+const InputField: FC<IProps> = ({icon, altText = "", value, onChange, type = "text", placeholder = "", validate }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = () => {
@@ -14,7 +24,10 @@ export default function InputField({ icon, altText, value, onChange, type = "tex
 
     return (
         <>
-            <div className={`${styles['contact-form__item']} ${isFocused ? styles['contact-form__item--active'] : ''} ${validate ? styles['contact-form__item--error'] : ''}`}>
+            <div
+                className={`${styles['contact-form__item']} 
+                    ${isFocused ? styles['contact-form__item--active'] : ''} 
+                    ${validate ? styles['contact-form__item--error'] : ''}`}>
                 <img src={icon} alt={altText} />
                 <span></span>
                 <input
@@ -30,4 +43,6 @@ export default function InputField({ icon, altText, value, onChange, type = "tex
             {validate && <span className={styles['error-message']}>Name is required</span>}
         </>
     );
-}
+};
+
+export default InputField;

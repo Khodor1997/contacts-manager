@@ -1,24 +1,34 @@
 import InputField from '../inputs/InputField';
 import ButtonForm from '../buttons/ButtonForm';
 import ContactFormImage from './ContactFormImage';
-import { useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import styles from './style.module.css';
 import user from './../../assets/icons/user.svg';
 import users from './../../assets/icons/users.svg';
 import phones from './../../assets/icons/phone.svg';
 import mail from './../../assets/icons/mail.svg';
 import edit from './../../assets/icons/edit.svg';
+import IContact from '../../types/contact';
 
-export default function ContactCreateForm({create}) {
-    const [contact, setContact] = useState({name: '', email: '', phone: '', address: '', message: '', isFavorite: false})
-    const [error, setError] = useState({name: '', contactInfo: ''})
+interface IErrorState {
+    name: boolean;
+    contactInfo: boolean;
+}
 
-    const handleSubmit = (e) => {
+interface IProps {
+    create: (contact: IContact) => void;
+}
+
+const ContactCreateForm: FC<IProps> = ({create}) => {
+    const [contact, setContact] = useState<IContact>({id: null, name: '', email: '', phone: '', address: '', message: '', isFavorite: false})
+    const [error, setError] = useState<IErrorState>({name: false, contactInfo: false})
+
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (validateForm()) {
             const newContact = { ...contact, id: Date.now() };
             create(newContact);
-            setContact({name: '', email: '', phone: '', address: '', message: ''});
+            setContact({name: '', email: '', phone: '', address: '', message: '', id: null, isFavorite: false});
         }
     };
 
@@ -31,12 +41,13 @@ export default function ContactCreateForm({create}) {
         const contactInfoValid = contact.phone.trim() != '' || contact.email.trim() != ''
 
         setError({
-            name: !nameValid,
+            name: nameValid,
             contactInfo: !contactInfoValid
         })
 
         return nameValid && contactInfoValid
     }
+
     return (
         <div className={styles['create-contact']}>
             <ContactFormImage styles={styles}/>
@@ -55,7 +66,7 @@ export default function ContactCreateForm({create}) {
                         altText="Email icon"
                         value={contact.email}
                         onChange={e => setContact({...contact, email: e.target.value})}
-                        className={error.contactInfo ? styles['error'] : ''}
+                        validate={error.name}
                         placeholder="Enter your email"
                     />
                     <InputField
@@ -63,8 +74,7 @@ export default function ContactCreateForm({create}) {
                         altText="Phone icon"
                         value={contact.phone}
                         onChange={e => setContact({...contact, phone: e.target.value})}
-                        className={error.contactInfo ? styles['error'] : ''}
-                        validate={error.contactInfo}
+                        validate={error.name}
                         placeholder="Enter your phone"
                     />
                     <InputField
@@ -86,7 +96,7 @@ export default function ContactCreateForm({create}) {
                         type="submit"
                         isFavorite={contact.isFavorite} 
                         onFavoriteClick={handleFavoriteClick}
-                        disabled={!contact.name || (!contact.phone && !contact.email)}
+                        disabled={!!(!contact.name || (!contact.phone && !contact.email))}
                     >
                         Submit
                     </ButtonForm>
@@ -94,4 +104,6 @@ export default function ContactCreateForm({create}) {
             </div>
         </div>
     );
-}
+};
+
+export default ContactCreateForm;

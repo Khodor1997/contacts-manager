@@ -1,8 +1,17 @@
 import StarIcon from '../icons/StarIcon';
 import styles from './style.module.css';
 import dots from '../../assets/icons/dotted.svg';
+import IContact from '../../types/contact';
+import { FC } from 'react';
 
-export default function ContactItem({ user, activeContactId, toggleActiveContact, remove }) {
+interface IProps {
+    user: IContact;
+    activeContactId: number | null;
+    toggleActiveContact: (id: number | null) => void;
+    remove: (user: IContact) => void;
+}
+
+const ContactItem: FC<IProps> = ({ user, activeContactId, toggleActiveContact, remove }) => {
     return (
         <div className={styles.contact}>
             <div className={styles['contact__info']}>
@@ -16,11 +25,10 @@ export default function ContactItem({ user, activeContactId, toggleActiveContact
                 </div>
             </div>
             <div className={styles['contact__actions']}>
-                {/* <StarIcon className={styles['contact__favorites']} /> */}
                 <StarIcon className={`${styles['contact__favorites']} ${user.isFavorite ? styles['contact__favorites_active'] : ''}`} />
 
                 <img 
-                    onClick={() => toggleActiveContact(user.id)} 
+                    onClick={() => toggleActiveContact(user.id || null)} 
                     className={styles['contact__control']} 
                     src={dots} 
                     alt="dots menu" 
@@ -34,4 +42,6 @@ export default function ContactItem({ user, activeContactId, toggleActiveContact
             )}
         </div>
     );
-}
+};
+
+export default ContactItem;

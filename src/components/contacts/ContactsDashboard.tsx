@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import ContactItem from './ContactItem';
 import ContactsAuthDetails from './ContactAuthDetails';
 import styles from './style.module.css';
+import IContact from '../../types/contact';
+import { User } from "firebase/auth";
 
-export default function ContactsDashboard({contacts, remove, authUser}) {
-    const [activeContactId, setActiveContactId] = useState(null);
 
-    function toggleActiveContact(contactId) {
+interface IProps {
+    contacts: IContact[],
+    remove: (user: IContact) => void,
+    authUser: User | null
+}
+
+const ContactsDashboard: FC<IProps> = ({contacts, remove, authUser}) => {
+    const [activeContactId, setActiveContactId] = useState<number | null>(null);
+
+    function toggleActiveContact(contactId: number | null): void {
         if (activeContactId === contactId) {
             setActiveContactId(null);
         } else {
@@ -31,4 +40,6 @@ export default function ContactsDashboard({contacts, remove, authUser}) {
             )}
         </div>
     );
-}
+};
+
+export default ContactsDashboard;

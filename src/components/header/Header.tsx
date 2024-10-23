@@ -3,9 +3,7 @@ import Button from '../buttons/Button'
 import CodeIcon from '../icons/CodeIcon'
 import NightIcon from '../icons/NightIcon'
 
-
-
-export default function Header() {
+const Header = () => {
     return (
         <header className={styles['header-container']}>
             <div className={`${styles.header} container`}>
@@ -19,4 +17,6 @@ export default function Header() {
             </div>
         </header>
     )
-}
+};
+
+export default Header;

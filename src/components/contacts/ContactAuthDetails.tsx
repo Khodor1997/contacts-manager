@@ -5,10 +5,10 @@ import UserIcon from "../icons/UserIcon";
 import { User } from "firebase/auth";
 import { FC } from "react";
 
-type Styles = { [className: string]: string }; 
+type TStyles = { [className: string]: string }; 
 
 interface ContactsAuthDetailsProps {
-    styles: Styles,
+    styles: TStyles,
     authUser: User | null,
 };
 

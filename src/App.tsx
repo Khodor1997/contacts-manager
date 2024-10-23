@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
+import { User } from "firebase/auth";
 import Header from './components/header/Header'
 import ContactsDashboard from './components/contacts/ContactsDashboard'
 import ContactCreateForm from './components/contacts/ContactCreateForm'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
-// import AuthDetails from './components/auth/AuthDetails'
 import { useAuth } from './hooks/useAuth'
+import IContact from './types/contact';
 
 function App() {
-  const [contacts, setContact] = useState([
-    { id: 1, name: 'Pavel', lastName: 'Bobar', phone: '+375295800809', img: '/profile.png', isFavorite: false },
-    { id: 2, name: 'John', lastName: 'Doe', phone: '+1234567890', img: '/profile.png', isFavorite: false },
+  const [contacts, setContact] = useState<IContact[]>([
+    { id: 1, name: 'Pavel', email: 'sdfsdfsdf@mail.ru', phone: '+375295800809', img: '/profile.png', isFavorite: false },
+    { id: 2, name: 'John', email: 'Doedddddd@mail.ru', phone: '+1234567890', img: '/profile.png', isFavorite: false },
   ])
+  const [showRegistrationForm, setShowRegistrationForm ] = useState<boolean>(false)
 
-  const [showRegistrationForm, setShowRegistrationForm ] = useState(false)
+  const authUser: User | null = useAuth()
 
-  const authUser = useAuth()
-
-  const createContact = (newContact) => {
+  const createContact = (newContact: IContact) => {
     setContact([...contacts, newContact])
   }
 
-  const removeContact = (contact) => {
+  const removeContact = (contact: IContact) => {
     setContact(contacts.filter(e => e.id != contact.id))
   }
   const redirectToSignUp = () => {

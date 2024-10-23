@@ -8,16 +8,7 @@ import users from './../../assets/icons/users.svg';
 import phones from './../../assets/icons/phone.svg';
 import mail from './../../assets/icons/mail.svg';
 import edit from './../../assets/icons/edit.svg';
-
-interface IContact {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    message: string;
-    isFavorite: boolean;
-    id?: number | null;
-}
+import IContact from '../../types/contact';
 
 interface IErrorState {
     name: boolean;
@@ -29,7 +20,7 @@ interface IProps {
 }
 
 const ContactCreateForm: FC<IProps> = ({create}) => {
-    const [contact, setContact] = useState<IContact>({name: '', email: '', phone: '', address: '', message: '', isFavorite: false})
+    const [contact, setContact] = useState<IContact>({id: null, name: '', email: '', phone: '', address: '', message: '', isFavorite: false})
     const [error, setError] = useState<IErrorState>({name: false, contactInfo: false})
 
     const handleSubmit = (e: FormEvent) => {

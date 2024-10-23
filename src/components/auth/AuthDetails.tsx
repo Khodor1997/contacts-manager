@@ -1,4 +1,4 @@
-import { onAuthStateChanged, User } from "firebase/auth"; // Импорт типов из Firebase
+import { onAuthStateChanged, User } from "firebase/auth";
 import { FC, useEffect, useState } from "react";
 import { auth } from "../../firebase";
 

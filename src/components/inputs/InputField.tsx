@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FC } from 'react';
 
 interface IProps {
     icon: string;
@@ -8,10 +8,10 @@ interface IProps {
     type?: string;
     placeholder?: string;
     altText?: string;
-    validate?: string;
+    validate?: boolean;
 }
 
-export default function InputField({icon, altText = "", value, onChange, type = "text", placeholder = "", validate }: IProps) {
+const InputField: FC<IProps> = ({icon, altText = "", value, onChange, type = "text", placeholder = "", validate }) => {
     const [isFocused, setIsFocused] = useState(false);
 
     const handleFocus = () => {
@@ -43,4 +43,6 @@ export default function InputField({icon, altText = "", value, onChange, type = 
             {validate && <span className={styles['error-message']}>Name is required</span>}
         </>
     );
-}
+};
+
+export default InputField;

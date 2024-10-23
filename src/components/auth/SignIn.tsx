@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { useState, ChangeEvent, MouseEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, FC } from "react";
 import { auth } from "../../firebase";
 import InputField from "../inputs/InputField";
 import ContactFormImage from '../contacts/ContactFormImage';
@@ -8,16 +8,16 @@ import styles from './style.module.css';
 import userIcon from './../../assets/icons/user.svg';
 import editIcon from './../../assets/icons/edit.svg';
 
-interface SignInProps {
+interface IProps {
     redirectToSignUp: () => void;
 }
 
-export default function SignIn({ redirectToSignUp }: SignInProps) {
+const SignIn: FC<IProps> = ({ redirectToSignUp }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
 
-    function logIn(e: MouseEvent<HTMLButtonElement>) {
+    function logIn(e: MouseEvent<HTMLButtonElement>): void {
         e.preventDefault();
 
         signInWithEmailAndPassword(auth, email, password)
@@ -26,17 +26,17 @@ export default function SignIn({ redirectToSignUp }: SignInProps) {
                 setPassword('');
                 setError('');
             })
-            .catch((error) => {
+            .catch((error: Error) => {
                 console.error(error);
                 setError('Sorry, something went wrong.');
             });
     }
 
-    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setEmail(e.target.value);
     };
 
-    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setPassword(e.target.value);
     };
 
@@ -73,4 +73,6 @@ export default function SignIn({ redirectToSignUp }: SignInProps) {
             </div>
         </div>
     );
-}
+};
+
+export default SignIn;

@@ -1,14 +1,12 @@
 import { onAuthStateChanged, User } from "firebase/auth"; // Импорт типов из Firebase
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { auth } from "../../firebase";
 
-export default function AuthDetails() {
-    // authUser может быть либо объектом User, либо null
+const AuthDetails: FC = () => {
     const [authUser, setAuthUser] = useState<User | null>(null);
 
     useEffect(() => {
-        const listen = onAuthStateChanged(auth, (user: User | null) => { // Типизация user
-            console.log(user, 'fdfdf');
+        const listen = onAuthStateChanged(auth, (user: User | null) => {
             if (user) {
                 setAuthUser(user);
             } else {
@@ -16,7 +14,7 @@ export default function AuthDetails() {
             }
         });
         return () => {
-            listen(); // Отписываемся от прослушивания
+            listen();
         };
     }, []);
 
@@ -27,4 +25,6 @@ export default function AuthDetails() {
             ) : <p>Signed out</p>}
         </div>
     );
-}
+};
+
+export default AuthDetails;

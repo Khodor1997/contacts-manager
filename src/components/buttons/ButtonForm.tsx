@@ -1,12 +1,22 @@
+import { FC } from 'react';
 import StarIcon from '../icons/StarIcon';
 import styles from './styles.module.css'
 
-export default function ButtonForm ({ children, type = "button", onClick, onFavoriteClick, isFavorite, disabled}) {
+interface IProps {
+    children: React.ReactNode,
+    type?: "button" | "submit" | "reset",
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    onFavoriteClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    isFavorite?: boolean,
+    disabled? : boolean
+}
+
+const ButtonForm: FC<IProps> = ({ children, type = "button", onClick, onFavoriteClick, isFavorite, disabled}) => {
     return (
         <div 
             className={styles['button-form']}
         >
-            {isFavorite ? (
+            {onFavoriteClick ? (
                 <>
                     <span style={{display: "flex"}} onClick={onFavoriteClick}>
                         <StarIcon 
@@ -26,4 +36,6 @@ export default function ButtonForm ({ children, type = "button", onClick, onFavo
             </button>
         </div>
     )
-}
+};
+
+export default ButtonForm;

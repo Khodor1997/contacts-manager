@@ -1,6 +1,14 @@
-import styles from './styles.module.css'
+import React, {FC} from 'react';
+import styles from './styles.module.css';
 
-export default function Button({ className, icon, children, onClick}) {
+interface IProps {
+    className?: string;
+    icon: React.ReactNode;
+    children: React.ReactNode;
+    onClick: () => void;
+}
+
+const Button:FC<IProps> = ({ className, icon, children, onClick }) => {
     return (
         <button onClick={onClick} className={`${styles.button} ${className || ''}`}>
             {className === 'reverse' ? (
@@ -15,5 +23,7 @@ export default function Button({ className, icon, children, onClick}) {
                 </>
             )}
         </button>
-    )
-}
+    );
+};
+
+export default Button;

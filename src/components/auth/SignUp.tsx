@@ -1,61 +1,66 @@
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import ContactFormImage from '../contacts/ContactFormImage';
-import InputField from "../inputs/InputField"
+import InputField from "../inputs/InputField";
 import ButtonForm from "../buttons/ButtonForm";
-import { useState } from "react"
-import { auth } from "../../firebase"
+import { useState, FormEvent, FC } from "react";
+import { auth } from "../../firebase";
 import styles from './style.module.css';
-import user from './../../assets/icons/user.svg';
-import edit from './../../assets/icons/edit.svg';
+import userIcon from './../../assets/icons/user.svg';
+import editIcon from './../../assets/icons/edit.svg';
 
-export default function SignUp ({redirectToSignIn}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [copyPassword, setCopyPassword] = useState('')
-    const [error, setError] = useState('')
+interface IProps {
+    redirectToSignIn: () => void;
+}
 
-    function register(e) {
-        e.preventDefault()
+const SignUp: FC<IProps> = ({ redirectToSignIn }) => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [copyPassword, setCopyPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
+
+    const register = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (copyPassword !== password) {
-            setError('Password incorrect')
-            return
+            setError('Password incorrect');
+            return;
         }
         createUserWithEmailAndPassword(auth, email, password)
-            .then((user) => {
-                setEmail('')
-                setPassword('')
-                setCopyPassword('')
-                setError('')
-            }).catch((error) => console.log(error))
-    }
+            .then(() => {
+                setEmail('');
+                setPassword('');
+                setCopyPassword('');
+                setError('');
+            })
+            .catch((error) => console.error(error.message));
+    };
 
     return (
         <div className={styles['auth-background']}>
             <div className={styles['auth']}>
-                <ContactFormImage styles={styles}/>
+                <ContactFormImage styles={styles} />
                 <div className={styles['auth-form']}>
                     <form onSubmit={register}>
                         <InputField
-                            icon={user}
+                            icon={userIcon}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                             placeholder="Enter your login"
                         />
                         <InputField
-                            icon={edit}
+                            icon={editIcon}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                             type="password"
                             placeholder="Enter your password"
                         />
                         <InputField
-                            icon={edit}
+                            icon={editIcon}
                             value={copyPassword}
                             onChange={e => setCopyPassword(e.target.value)}
                             type="password"
                             placeholder="Enter your password"
                         />
-                        <div 
+                        <div
                             onClick={redirectToSignIn}
                             className={styles['signup-text']}
                         >
@@ -66,5 +71,7 @@ export default function SignUp ({redirectToSignIn}) {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default SignUp;

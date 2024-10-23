@@ -1,4 +1,10 @@
-export default function UserIcon({className}) {
+import { FC } from "react";
+
+type TProps = {
+    className?: string
+}
+
+const UserIcon:FC<TProps> = ({className}) => {
     return (
         <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 8.33332C11.841 8.33332 13.3333 6.84094 13.3333 4.99999C13.3333 3.15904 11.841 1.66666 10 1.66666C8.15906 1.66666 6.66667 3.15904 6.66667 4.99999C6.66667 6.84094 8.15906 8.33332 10 8.33332Z" stroke-width="1.5"/>
@@ -6,4 +12,6 @@ export default function UserIcon({className}) {
         </svg>
 
     )
-}
+};
+
+export default UserIcon;
